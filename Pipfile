@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 black = "*"
+isort = "*"
+mypy = "*"
 
 [dev-packages]
 

@@ -1,15 +1,14 @@
 import re
-from typing import Dict, List
-from pathlib import Path
-import math
 from functools import reduce
+from pathlib import Path
+from typing import Dict, List
 
 from puzzles.util import read_file_into_list
 
 
 def parse_game_as_dict(game: str) -> Dict:
     """
-    Parse string representing game results into nested dict.
+    Parse string representing game results into nested dict with key as game ID.
 
     Args:
         game (str): Game outcomes e.g. "Game 1: 1 red, 5 blue; 5 green, 6 blue, 12 red"
@@ -36,7 +35,7 @@ def parse_game_as_dict(game: str) -> Dict:
 
 def is_valid_reveal(config: Dict, reveal: Dict) -> bool:
     """
-    Helper function to check if reveal is allowed based on input config.
+    Check if reveal is allowed based on input config.
 
     Args:
         config (Dict): Input configuration for red, blue and green cubes.
@@ -80,7 +79,7 @@ def get_minimum_cubes(game: Dict) -> List:
     minimum = {"red": 1, "green": 1, "blue": 1}
     for reveal in game.values():
         for colour, count in reveal.items():
-            minimum[colour] = max(minimum.get(colour, 1), count)
+            minimum[colour] = max(minimum.get(colour), count)
     return list(minimum.values())
 
 
