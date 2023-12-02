@@ -1,6 +1,8 @@
 import re
-from pathlib import Path
 from typing import List
+from pathlib import Path
+
+from ..util import read_file_into_list
 
 
 WORD_TO_DIGIT = {
@@ -14,21 +16,6 @@ WORD_TO_DIGIT = {
     "eight": "8",
     "nine": "9",
 }
-
-
-def read_file_into_list(file_path: Path) -> List:
-    """
-    Read lines from file into list.
-
-    Args:
-        file_path (Path): Path to input file.
-    Returns:
-        List: List of strings representing new-line separated lines from file.
-    """
-    file = open(file_path, "r")
-    data = file.read().split("\n")
-    file.close()
-    return data
 
 
 def find_digits(input: str) -> List:
@@ -80,7 +67,7 @@ def get_sum_of_calibration_values(data: List) -> int:
 
 def main():
     # read input file
-    data = read_file_into_list(Path("input.txt"))
+    data = read_file_into_list(Path(__file__).parent / "input.txt")
 
     # calculate sum of calibration values
     sum = get_sum_of_calibration_values(data)
