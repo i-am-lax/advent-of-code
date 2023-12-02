@@ -4,7 +4,7 @@ from pathlib import Path
 import math
 from functools import reduce
 
-from ..util import read_file_into_list
+from puzzles.util import read_file_into_list
 
 
 def parse_game_as_dict(game: str) -> Dict:

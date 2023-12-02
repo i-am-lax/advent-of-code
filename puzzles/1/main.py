@@ -2,7 +2,7 @@ import re
 from typing import List
 from pathlib import Path
 
-from ..util import read_file_into_list
+from puzzles.util import read_file_into_list
 
 
 WORD_TO_DIGIT = {
