@@ -54,6 +54,17 @@ def get_location_recursive(n: int, maps: Dict, names: List) -> int:
     return get_location_recursive(next, maps, names[1:])
 
 
+def generate_seeds(seeds: List) -> List:
+    """
+    Part 2: Generate extensive set of seed numbers.
+    """
+    output = []
+    for idx, val in enumerate(seeds):
+        if idx % 2 == 0:
+            output.extend(range(val, val + seeds[idx + 1]))
+    return output
+
+
 def main():
     order = [
         "seed-to-soil",
@@ -66,8 +77,13 @@ def main():
     ]
     seeds, maps = generate_mappings()
     min_location = None
+
+    # part 2: generate seed numbers
+    seeds = generate_seeds(seeds)
+
     for seed in seeds:
-        location = get_location_recursive(seed, maps, order)
+        location = get_location(seed, maps)
+        # location = get_location_recursive(seed, maps, order)
         if min_location is None:
             min_location = location
         else:
