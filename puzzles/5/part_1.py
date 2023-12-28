@@ -44,11 +44,30 @@ def get_location(seed: int, maps: Dict) -> int:
     return location_number
 
 
+def get_location_recursive(n: int, maps: Dict, names: List) -> int:
+    operation = names[0]
+    next = apply_category_map(n, maps, operation)
+    # base case when we reach humidity-to-location
+    if operation == "humidity-to-location":
+        return next
+    # recursive
+    return get_location_recursive(next, maps, names[1:])
+
+
 def main():
+    order = [
+        "seed-to-soil",
+        "soil-to-fertilizer",
+        "fertilizer-to-water",
+        "water-to-light",
+        "light-to-temperature",
+        "temperature-to-humidity",
+        "humidity-to-location",
+    ]
     seeds, maps = generate_mappings()
     min_location = None
     for seed in seeds:
-        location = get_location(seed, maps)
+        location = get_location_recursive(seed, maps, order)
         if min_location is None:
             min_location = location
         else:
